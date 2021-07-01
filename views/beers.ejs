@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+
+	<%- include("inc/head") -%>
+	
+	<body>
+		
+	<div class="gtco-loader"></div>
+	
+	<div id="page">
+
+	
+	<%- include("inc/header-menu") -%>
+	
+	<%- include("inc/header-beers") -%>
+	
+	
+	<div class="gtco-section">
+		<div class="gtco-container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center gtco-heading">
+					<h2 class="cursive-font primary-color">Cervejas Artesanais</h2>
+					<p>Encontre a cerveja ideal para você!</p>
+				</div>
+			</div>
+			<div class="row">
+				<% beers.forEach(function(row){ %>
+				<div class="col-lg-4 col-md-4 col-sm-6">
+					<a href="/beer/<%= row.id_beer %>" class="fh5co-card-item">
+						<figure>
+							<div class="overlay">
+								<i class="ti-plus"></i>
+							</div>
+							<img src="<%= row.photo %>" alt="Image" class="img-responsive">
+						</figure>
+						<div class="fh5co-text">
+							<h2><%= row.title %></h2>
+							<p> <%= row.s_description %></p>
+							<p><strong>Tipo</strong>: <%= row.categories %></p>
+							<p><strong>Cervejeiro</strong>: <%= row.name %></p>
+							<p><strong>Cidade</strong>: <%= row.city %></p>
+							<p>
+								<span class="price price-font"><strong>Trocar</strong>: <%= row.exchange %></span>
+							</p>
+						</div>
+					</a>
+				</div>
+				<% }); %>
+			</div>
+		</div>
+	</div>
+	<%- include("inc/footer-scripts") -%>
+
+	</body>
+</html>
+

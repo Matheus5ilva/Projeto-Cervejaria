@@ -1,0 +1,131 @@
+<%- include("inc/header") -%>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Propostas de Trocas
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="/admin/"><i class="fa fa-home"></i> Home</a></li>
+      <li class="active">Trocas</li>
+    </ol>
+  </section>
+
+  <!-- Main content -->
+  <section class="content container-fluid">
+
+    <div class="box">
+      <div class="box-header">
+        <h3 class="box-title">Propostas</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body no-padding card-body table-responsive p-0">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Nome da Cerveja</th>
+              <th>Qtde de garrafas</th>
+              <th>Cerveja Ofertada</th>
+              <th>Cidade</th>
+              <th style="min-width: 134px;">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% data.forEach(function(row){ %>
+            <tr data-row="<%= JSON.stringify(row); %>">
+              <td><%= row.name %></td>
+              <td><%= row.title %></td>
+              <td><%= row.n_bottle %> garrafas</td>
+              <td><%= row.categories %></td>
+              <td><%= row.city %></td>
+              <td><button type="button" class="btn btn-xs btn-info btn-update"><i class="fa fa-pencil"></i>
+                  Visualizar</button>&nbsp;<button type="button" class="btn btn-xs btn-success btn-confirm"><i class="fa fa-check"></i>
+                  Confirmar</button>&nbsp;<button type="button" class="btn btn-xs btn-danger btn-delete"><i
+                    class="fa fa-trash"></i> Excluir</button></td>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+      <!-- /.box-body -->
+    </div>
+
+  </section>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<div class="modal fade" id="modal-update">
+  <div class="modal-dialog">
+    <div class="modal-content" style="border-top: 3px solid #00c0ef;">
+      <form method="post" action="/admin/trocas">
+        <input type="hidden" name="id_exchange">
+        <input type="hidden" name="id_beer">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">Dados da Proposta</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="inputNameUpdate">Nome do Trocador</label>
+            <input type="text" class="form-control" id="inputNameUpdate" name="name" disabled>
+          </div>
+          <div class="form-group">
+            <label for="inputEmailUpdate">E-mail</label>
+            <input type="email" class="form-control" id="inputEmailUpdate" name="email" disabled>
+          </div>
+          <div class="form-group">
+            <label for="inputPhoneUpdate">Telefone</label>
+            <input type="number" class="form-control" id="inputPhoneUpdate" name="phone" disabled>
+          </div>
+          <div class="form-group">
+            <label for="inputCategoriesUpdate">Tipo de cerveja proposta</label>
+            <input type="text" class="form-control" id="inputCategoriesUpdate" name="categories" disabled>
+          </div>
+          <div class="form-group">
+            <label for="inputNBottleUpdate">Número de garrafas oferecida</label>
+            <input type="number" class="form-control" id="inputNBottleUpdate" name="n_bottle" disabled>
+          </div>
+          <div class="form-group">
+            <label for="inputAddressUpdate">Endereço</label>
+            <input type="text" class="form-control" id="inputAddressUpdate" name="address" disabled>
+          </div>
+          <div class="form-group">
+            <label for="inputCityUpdate">Cidade</label>
+            <input type="text" class="form-control" id="inputCityUpdate" name="city" disabled>
+          </div>
+          <div class="form-group">
+            <label for="inputCommentsUpdate">Observações</label>
+            <textarea class="form-control" id="inputCommentsUpdate" name="comments" disabled></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Fechar</button>
+        </div>
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<!-- Main Footer -->
+
+<%- include("inc/footer") -%>
+
+<script src="/js/matheus-formsave.js"></script>
+<script src="/js/matheus-grid.js"></script>
+
+<script>
+  new MatheusGrid({
+    deleteUrl: '/admin/trocas/${data.id_exchange}',
+    deleteMsg: 'Deseja realmente excluir a proposta do(a) ${data.name}?',
+    confirmUrl: '/admin/trocas/${data.id_exchange}',
+    confirmMsg: 'Deseja realmente aceitar a proposta do(a) ${data.name}?'
+  });
+
+</script>

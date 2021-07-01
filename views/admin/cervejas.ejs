@@ -1,0 +1,185 @@
+<%- include("inc/header") -%>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Cervejas
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="/admin/"><i class="fa fa-home"></i> Home</a></li>
+      <li class="active">Cervejas</li>
+    </ol>
+  </section>
+
+  <!-- Main content -->
+  <section class="content container-fluid">
+
+    <div class="box">
+      <div class="box-header">
+        <h3 class="box-title">Lista</h3>
+        <a href="#" class="btn btn-xs pull-right btn-success" data-toggle="modal" data-target="#modal-create"><i
+            class="fa fa-plus"></i> Novo</a>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body no-padding card-body table-responsive p-0">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Foto</th>
+              <th>Nome da Cerveja</th>
+              <th>Tipo de Cerveja</th>
+              <th>Garrafas Disponíveis</th>
+              <th style="min-width: 134px;">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% data.forEach(function(row){ %>
+            <tr data-row="<%= JSON.stringify(row); %>">
+              <td><img src="/<%= row.photo %>" alt="" style="height: 18px;"></td>
+              <td><%= row.title %></td>
+              <td><%= row.categories %></td>
+              <td><%= row.available %> garrafas</td>
+              <td><button type="button" class="btn btn-xs btn-info btn-update"><i class="fa fa-pencil"></i>
+                  Editar</button>&nbsp;<button type="button" class="btn btn-xs btn-danger btn-delete"><i
+                    class="fa fa-trash"></i> Excluir</button></td>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+      <!-- /.box-body -->
+    </div>
+
+  </section>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<div class="modal fade" id="modal-create">
+  <div class="modal-dialog">
+    <div class="modal-content" style="border-top: 3px solid #00a65a;">
+      <form method="post" action="/admin/cervejas">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">Nova Cerveja</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="inputTitleCreate">Nome da Cerveja</label>
+            <input type="text" class="form-control" id="inputTitleCreate" name="title">
+          </div>
+          <div class="form-group">
+            <label for="inputDescriptionCreate">Descrição</label>
+            <textarea class="form-control" id="inputDescriptionCreate" name="description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="inputCategoriesCreate">Categoria da Cerveja</label>
+            <input type="text" class="form-control" id="inputCategoriesCreate" name="categories">
+          </div>
+          <div class="form-group">
+            <label for="inputExchangeCreate">Trocar por Cerveja</label>
+            <input type="text" class="form-control" id="inputExchangeCreate" name="exchange">
+          </div>
+          <div class="form-group">
+            <label for="inputAvailableCreate">Garrafas Disponíveis</label>
+            <input type="number" class="form-control" id="inputAvailableCreate" name="available">
+          </div>
+          <div class="form-group">
+            <label for="inputPhotoCreate">Foto</label>
+            <img style="max-width: 128px; max-height: 128px; display: block;" src="/images/rotulo-TrocaBeer.png">
+            <input type="file" class="form-control" id="inputPhotoCreate" name="photo">
+          </div>
+          <div class="form-group">
+            <label for="inputIdCervejeiroCreate">Id do Cervejeiro</label>
+            <input type="number" class="form-control" id="inputIdCervejeiroCreate" name="id_cervejeiro">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-success">Salvar</button>
+        </div>
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="modal-update">
+  <div class="modal-dialog">
+    <div class="modal-content" style="border-top: 3px solid #00c0ef;">
+      <form method="post" action="/admin/cervejas">
+        <input type="hidden" name="id_beer">
+        <input type="hidden" name="id_cervejeiro">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">Editar Cerveja</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="inputTitleUpdate">Nome da Cerveja</label>
+            <input type="text" class="form-control" id="inputTitleUpdate" name="title">
+          </div>
+          <div class="form-group">
+            <label for="inputDescriptionUpdate">Descrição da Cerveja</label>
+            <textarea class="form-control" id="inputDescriptionUpdate" name="description"></textarea>
+          </div>
+          <input type="hidden" name="categories">
+          <div class="form-group">
+            <label for="inputExchangeUpdate">Trocar por cerveja</label>
+            <input type="text" class="form-control" id="inputTitleUpdate" name="exchange">
+          </div>
+          <div class="form-group">
+            <label for="inputAvailableUpdate">Garrafas Disponíveis</label>
+            <input type="number" class="form-control" id="inputAvailableUpdate" name="available">
+          </div>
+          <div class="form-group">
+            <label for="inputPhotoUpdate">Foto</label>
+            <img style="max-width: 128px; max-height: 128px; display: block;" src="dist/img/boxed-bg.jpg">
+            <input type="file" class="form-control" id="inputPhotoUpdate" name="photo">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-info">Salvar</button>
+        </div>
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<!-- Main Footer -->
+
+<%- include("inc/footer") -%>
+
+<script src="/js/matheus-filereader.js"></script>
+<script src="/js/matheus-formsave.js"></script>
+<script src="/js/matheus-grid.js"></script>
+
+<script>
+
+  new MatheusFileReader("#modal-create [type=file]", '#modal-create img');
+  new MatheusFileReader("#modal-update [type=file]", '#modal-update img');
+  new MatheusGrid({
+    deleteUrl: '/admin/cervejas/${data.id_beer}',
+    deleteMsg: 'Deseja realmente excluir o ${data.title}?',
+    onUpdateLoad: (form, name, data) => {
+      let input = form.querySelector(`[name=${name}]`);
+      switch (name) {
+        case 'photo':
+          form.querySelector('img').src = `/${data[name]}`;
+          break;
+        default:
+          if (input) input.value = data[name];
+      }
+    }
+  });
+
+</script>

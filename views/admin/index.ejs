@@ -1,0 +1,58 @@
+<%- include('inc/header') -%>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>
+          Tela Inicial
+        </h1>
+        <ol class="breadcrumb">
+          <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+        </ol>
+      </section>
+
+      <!-- Main content -->
+      <section class="content container-fluid">
+
+        <div class="row">
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="info-box" onclick="window.location.href = '/admin/cervejas'" style="cursor:pointer">
+              <span class="info-box-icon bg-aqua">
+                <i class="ion ion-beer"></i>
+              </span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Cervejas Produzidas</span>
+                <span class="info-box-number"><%= data.nrbeers %></span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="info-box" onclick="window.location.href = '/admin/trocas'" style="cursor:pointer">
+              <span class="info-box-icon bg-red">
+                <i class="fa fa-exchange"></i>
+              </span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Pedidos de Trocas </span>
+                <span class="info-box-number"><%= data.nrexchange %></span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <!-- /.col -->
+        </div>
+
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+<%- include('inc/footer') -%>
+ 

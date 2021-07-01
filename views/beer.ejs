@@ -1,0 +1,278 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title><%= title %></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description"
+		content="Site do restaurante fictício Saboroso desenvolvido no curso de JavaScript da Hcode Treinamentos" />
+	<meta name="author" content="Hcode.com.br" />
+
+	<link rel="icon" href="favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
+	<meta name="theme-color" content="#FBB448">
+
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Playball" rel="stylesheet">
+
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="/css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="/css/icomoon.css">
+	<!-- Themify Icons-->
+	<link rel="stylesheet" href="/css/themify-icons.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="/css/bootstrap.css">
+
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="/css/magnific-popup.css">
+
+	<!-- Bootstrap DateTimePicker -->
+	<link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css">
+
+	<!-- Owl Carousel  -->
+	<link rel="stylesheet" href="/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="/css/owl.theme.default.min.css">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="/css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="/js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+		<script src="js/respond.min.js"></script>
+		<![endif]-->
+
+</head>
+
+<body>
+
+	<div class="gtco-loader"></div>
+
+	<div id="page">
+		<%- include("inc/header-menu") -%>
+
+		<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner"
+			style="background-image: url(/images/537021-PJIXFO-194.jpg)">
+			<div class="overlay"></div>
+			<div class="gtco-container">
+				<div class="row">
+					<div class="col-md-12 col-md-offset-0 text-center">
+						<div class="row row-mt-15em">
+							<% beer.forEach(function(row){ %>
+							<div class="col-md-12 mt-text animate-box" data-animate-effect="fadeInUp">
+								<h1 class="cursive-font"><%= row.title%></h1>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</header>
+
+
+		<div class="gtco-section" style="padding-bottom: 14em;">
+			<div class="gtco-container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="col-md-6 animate-box">
+							<div class="gtco-contact-info" data-row="<%= JSON.stringify(row); %>">
+								<h3>Detalhes da cerveja</h3>
+								<p><strong>Descrição: </strong><%= row.description%></p>
+								<p><strong>Tipo de carveja: </strong><%= row.categories%></p>
+								<p><strong>Trocar por cerveja: </strong><%= row.exchange%></p>
+								<p><strong>Cerveja disponível: </strong><%= row.available%> garrafa(s)</p>
+							</div>
+							<div class="gtco-contact-info" data-row="<%= JSON.stringify(row); %>">
+								<h3>Informações do Cervejeiro - <%= row.name%></h3>
+								<ul>
+									<li class="address"><%= row.address%><br><%= row.city%></li>
+									<li class="phone"><a href="tel://<%= row.phone%>"><%= row.phone%></a></li>
+									<li class="phone"><a href="tel://<%= row.mobile_phone%>"><%= row.mobile_phone%></a>
+									</li>
+									<li class="email"><a href="mailto:<%= row.email%>"><%= row.email%></a></li>
+								</ul>
+							</div>
+
+						</div>
+
+						<div class="col-md-5 col-md-push-1 animate-box">
+							<%- include("inc/content/alerts") -%>
+							<h3>Realizar proposta</h3>
+							<form action="/beer/<%= row.id_beer%>" method="POST">
+								<input type="hidden" name="id_beer" value="<%= row.id_beer%>">
+								<% }); %>
+								<div class="row form-group">
+									<div class="col-md-12">
+										<label for="inputName">Nome</label>
+										<input type="text" id="inputName" name="name" class="form-control"
+											value="<%= body.name%>">
+									</div>
+								</div>
+								<div class="row form-group">
+									<div class="col-md-12">
+										<label for="inputEmail">E-mail</label>
+										<input type="email" id="inputEmail" name="email" class="form-control"
+											value="<%= body.email%>">
+									</div>
+								</div>
+								<div class="row form-group">
+									<div class="col-md-12">
+										<label for="inputPhone">Telefone</label>
+										<input type="number" id="inputPhone" name="phone" class="form-control"
+											value="<%= body.phone%>">
+									</div>
+								</div>
+								<div class="row form-group">
+									<div class="col-md-12">
+										<label for="inputCategories">Tipo de cerveja</label>
+										<input type="text" id="categories" name="categories" class="form-control"
+											value="<%= body.categories%>">
+									</div>
+								</div>
+								<div class="row form-group">
+									<div class="col-md-12">
+										<label for="inputNBottle">Número de Garrafas para Trocar</label>
+										<input type="number" id="inputn_bottle" name="n_bottle" class="form-control"
+											value="<%= body.n_bottle%>">
+									</div>
+								</div>
+								<div class="row form-group">
+									<div class="col-md-12">
+										<label for="inputAddress">Endereço</label>
+										<input type="text" id="inputAddress" name="address" class="form-control"
+											value="<%= body.address%>">
+									</div>
+								</div>
+								<div class="row form-group">
+									<div class="col-md-12">
+										<label for="inputCity">Cidade</label>
+										<input type="text" id="inputCity" name="city" class="form-control"
+											value="<%= body.city%>">
+									</div>
+								</div>
+								<div class="row form-group">
+									<div class="col-md-12">
+										<label for="inputComments">Observações</label>
+										<textarea id="inputComments" name="comments" class="form-control"
+											value="<%= body.comments%>"></textarea>
+									</div>
+								</div>
+								<div class="row form-group">
+									<div class="col-md-12">
+										<input type="submit" class="btn btn-primary btn-block" value="Trocar Agora">
+									</div>
+								</div>
+							</form>
+							* A forma de troca e o modo de entrega não é responsabilidade da TrocaBeer.<br>
+							** Se houver alguma forma de compra e venda de cerveja, não deverá ser realizada nesta plataforma. Com isso, a TrocaBeer não terá nenhuma responsabilidade legal do ocorrido.
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<footer id="gtco-footer" role="contentinfo" style="background-image: url(/images/bg-footer.jpg)"
+			data-stellar-background-ratio="0.5">
+			<div class="overlay"></div>
+			<div class="gtco-container">
+				<div class="row row-pb-md">
+
+					<div class="col-md-12 text-center">
+						<div class="gtco-widget">
+							<h3>Entrar em Contato</h3>
+							<ul class="gtco-quick-contact">
+								<li>
+									<a href="#">
+										<i class="icon-phone"></i> +1 234 567 890</a>
+								</li>
+								<li>
+									<a href="#">
+										<i class="icon-mail2"></i> contato@trocabeer.com.br</a>
+								</li>
+							</ul>
+						</div>
+						<div class="gtco-widget">
+							<h3>Redes Sociais</h3>
+							<ul class="gtco-social-icons">
+								<li>
+									<a href="https://twitter.com/hcodebr">
+										<i class="icon-twitter"></i>
+									</a>
+								</li>
+								<li>
+									<a href="https://www.facebook.com/hcodebr">
+										<i class="icon-facebook"></i>
+									</a>
+								</li>
+								<li>
+									<a href="https://www.linkedin.com/company/grupo-hcode/">
+										<i class="icon-linkedin"></i>
+									</a>
+								</li>
+								<li>
+									<a href="https://www.youtube.com/channel/UCjWENuSH2gX55-y7QSZiWxA">
+										<i class="icon-youtube"></i>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="col-md-12 text-center copyright">
+						<p>
+							<small class="block">Todos os Direitos Reservados.</small>
+							<small class="block">Desenvolvido por Matheus Alexandre.
+							</small>
+						</p>
+					</div>
+				</div>
+
+			</div>
+		</footer>
+
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop">
+			<i class="icon-arrow-up"></i>
+		</a>
+	</div>
+
+	<!-- jQuery -->
+	<script src="/js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="/js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="/js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="/js/jquery.waypoints.min.js"></script>
+	<!-- Carousel -->
+	<script src="/js/owl.carousel.min.js"></script>
+	<!-- countTo -->
+	<script src="/js/jquery.countTo.js"></script>
+
+	<!-- Stellar Parallax -->
+	<script src="/js/jquery.stellar.min.js"></script>
+
+	<!-- Magnific Popup -->
+	<script src="/js/jquery.magnific-popup.min.js"></script>
+	<script src="/js/magnific-popup-options.js"></script>
+
+	<script src="/js/moment.min.js"></script>
+	<script src="/js/bootstrap-datetimepicker.min.js"></script>
+
+
+	<!-- Main -->
+	<script src="/js/main.js"></script>
+
+
+</body>
+
+</html>
